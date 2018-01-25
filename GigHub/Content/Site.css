@@ -92,10 +92,18 @@ h1, h2, h3 {
     padding: 8px 18px;
 }
 
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover,
-.navbar-inverse .navbar-nav > .open > a:focus {
-    color: #ffffff;
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* Navbar dropdown menu */
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     background-color: #512da8;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-color: none;
 }
 
 .dropdown-menu {
@@ -108,6 +116,18 @@ h1, h2, h3 {
     border-bottom-color: #ffffff;
 }
 
-.navbar-brand {
-    font-weight: 700;
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #512da8;
+}
+
+/* Hamburger button */
+.navbar-inverse .navbar-toggle {
+    border: none;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: #512da8;
 }
