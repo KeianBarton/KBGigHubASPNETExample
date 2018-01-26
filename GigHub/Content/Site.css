@@ -94,6 +94,9 @@ h1, h2, h3 {
 .btn {
     -ms-border-radius: 8px;
     border-radius: 8px;
+}
+
+.submit-btn {
     font-size: 16px;
     padding: 8px 18px;
 }
