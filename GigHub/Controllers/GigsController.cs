@@ -31,7 +31,7 @@ namespace GigHub.Controllers
             {
                 UpcomingGigs = gigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs You're Attending"
+                Heading = "Gigs I'm Attending"
             };
 
             return View("Gigs", viewModel);

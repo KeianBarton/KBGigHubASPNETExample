@@ -1,0 +1,44 @@
+﻿@model GigHub.ViewModels.FollowingsViewModel
+@{
+    ViewBag.Title = Model.Heading;
+}
+<h1>Following</h1>
+<ul class="followings voffset4">
+    @foreach (var f in Model.Followings)
+    {
+        <li>
+            <div>
+                <span>
+                    @f.Followee.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button data-user-id="@f.FolloweeId"
+                                class="btn btn-link btn-sm js-toggle-follow">
+                            Follow
+                        </button>
+                    }
+                </span>
+            </div>
+        </li>
+    }
+</ul>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/followings",
+                    // has to be in object body as expected in controller
+                    { followeeId: button.attr("data-user-id") })
+                    .done(function () { // success callback
+                        button.text("Following");
+                        button.prop("disabled", true);
+                    })
+                    .fail(function () {
+                        alert("Something failed!");
+                    });
+            });
+        });
+    </script>
+}

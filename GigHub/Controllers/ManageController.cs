@@ -1,4 +1,5 @@
-﻿using GigHub.ViewModels;
+﻿using GigHub.Models;
+using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -12,11 +13,13 @@ namespace GigHub.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -63,8 +66,11 @@ namespace GigHub.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var name = _context.Users.SingleOrDefault(u => u.Id == userId).Name;
+
             var model = new IndexViewModel
             {
+                Name = name,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),

@@ -1,4 +1,7 @@
 ﻿@model GigHub.ViewModels.GigsViewModel
+@{
+    ViewBag.Title = Model.Heading;
+}
 <h1>@Model.Heading</h1>
 <ul class="gigs voffset4">
     @foreach(var gig in Model.UpcomingGigs)
@@ -8,31 +11,41 @@
             <div class="month">
                 @gig.DateTime.ToString("MMM")
             </div>
+            <div class="year">
+                @gig.DateTime.ToString("yyyy")
+            </div>
             <div class="day">
                 @gig.DateTime.ToString("d ")
             </div>
         </div>
-        <div class="details">
-            <span class="artist">
-                @gig.Artist.Name
-                @if(Model.ShowActions)
-                {
-                    <button data-user-id="@gig.ArtistId"
-                            class="btn btn-link btn-sm js-toggle-follow">
-                        Follow
-                    </button>
-                }
-            </span>
-            <span class="genre">
-                @gig.Genre.Name
-            </span>
-            @if(Model.ShowActions)
-            {
-                <button data-gig-id="@gig.Id"
-                        class="btn btn-default btn-sm pull-right js-toggle-attendance">
-                    Going ?
-                </button>
-            }
+        <table class="details">
+            <tr>
+                <td class="artist">
+                    @gig.Artist.Name
+                    @if (Model.ShowActions)
+                    {
+
+                        <button data-user-id="@gig.ArtistId"
+                                class="btn btn-link btn-sm pull-right js-toggle-follow">
+                            Follow
+                        </button>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="genre">
+                    @gig.Genre.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button data-gig-id="@gig.Id"
+                                class="btn btn-default btn-sm pull-right js-toggle-attendance">
+                            Going ?
+                        </button>
+                    }
+                </td>
+            </tr>
+        </table>
+        <div class="space">
         </div>
     </li>
     }
@@ -64,6 +77,7 @@
                     { followeeId: button.attr("data-user-id") })
                     .done(function () { // success callback
                         button.text("Following");
+                        button.prop("disabled", true);
                     })
                     .fail(function () {
                         alert("Something failed!");

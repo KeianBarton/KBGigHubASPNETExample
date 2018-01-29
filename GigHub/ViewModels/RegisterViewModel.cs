@@ -6,7 +6,7 @@ namespace GigHub.ViewModels
     {
         [Required]
         [StringLength(100)]
-        [Display(Name = "User Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required]

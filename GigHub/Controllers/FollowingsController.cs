@@ -1,41 +1,38 @@
-﻿using GigHub.Dtos;
-using GigHub.Models;
+﻿using GigHub.Models;
+using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
-using System.Web.Http;
+using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
-    [Authorize]
-    public class FollowingsController : ApiController
+    public class FollowingsController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public FollowingsController()
         {
             _context = new ApplicationDbContext();
         }
 
-        [HttpPost]
-        public IHttpActionResult Follow(FollowingDto dto)
+        public ActionResult Following()
         {
             var userId = User.Identity.GetUserId();
-            var followingAlreadyExists = _context.Followings
-                .Any(f => f.FollowerId == userId
-                        && f.FolloweeId == dto.FolloweeId);
-            if (followingAlreadyExists)
-                return BadRequest("The attendance already exists.");
+            var followings = _context.Followings
+                .Where(f => f.FollowerId == userId)
+                .Include(f => f.Follower)
+                .Include(f => f.Followee)
+                .ToList();
 
-            var following = new Following
+            var viewModel = new FollowingsViewModel
             {
-                FolloweeId = userId,
-                FollowerId = dto.FolloweeId
+                Followings = followings,
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Artists I'm Following"
             };
 
-            _context.Followings.Add(following);
-            _context.SaveChanges();
-
-            return Ok();
+            return View("Followings", viewModel);
         }
     }
 }
