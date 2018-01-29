@@ -15,7 +15,7 @@
             <li>
                 @Html.ActionLink("Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="#">Gigs</a></li>
+            <li><a href="@Url.Action("Attending", "Gigs")">Gigs</a></li>
             <li><a href="#">Artists</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
