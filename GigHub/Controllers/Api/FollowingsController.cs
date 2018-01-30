@@ -2,6 +2,7 @@
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace GigHub.Controllers.Api
@@ -17,7 +18,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult Follow(FollowingDto dto)
+        public async Task<IHttpActionResult> Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
             var followingAlreadyExists = _context.Followings
@@ -37,7 +38,7 @@ namespace GigHub.Controllers.Api
             };
 
             _context.Followings.Add(following);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

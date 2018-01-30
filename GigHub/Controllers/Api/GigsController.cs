@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace GigHub.Controllers.Api
@@ -17,7 +18,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult Cancel(int id)
+        public async Task<IHttpActionResult> Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs
@@ -29,7 +30,7 @@ namespace GigHub.Controllers.Api
 
             gig.Cancel();
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

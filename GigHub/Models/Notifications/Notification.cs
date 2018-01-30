@@ -5,9 +5,6 @@ namespace GigHub.Models.Notifications
 {
     public class Notification
     {
-        private DateTime now;
-        private NotificationType notificationType;
-
         public int Id { get; private set; }
         public DateTime DateTime { get; private set; }
         public NotificationType Type { get; private set; }

@@ -2,6 +2,7 @@
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace GigHub.Controllers.Api
@@ -17,7 +18,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult Attend(AttendanceDto dto)
+        public async Task<IHttpActionResult> Attend(AttendanceDto dto)
         {
             var userId = User.Identity.GetUserId();
             var attendanceAlreadyExists = _context.Attendances
@@ -33,7 +34,7 @@ namespace GigHub.Controllers.Api
             };
 
             _context.Attendances.Add(attendance);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }
