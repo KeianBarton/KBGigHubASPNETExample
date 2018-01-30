@@ -30,6 +30,13 @@
                         @gig.Genre.Name
                     </td>
                 </tr>
+                <tr>
+                    <td class="actions">
+                        <a href="@Url.Action("Edit","Gigs",
+                                new { id = gig.Id })">Edit</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
             </table>
             <div class="gigs-list-space">
             </div>
