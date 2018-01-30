@@ -35,7 +35,7 @@ namespace GigHub.Controllers.Api
                 .ToList();
 
             _notificationHelper.AddUserNotifications(
-                _context, gig, attendees, NotificationType.GigCancelled);
+                gig, attendees, NotificationType.GigCancelled);
 
             gig.IsCancelled = true;
             _context.SaveChanges();
