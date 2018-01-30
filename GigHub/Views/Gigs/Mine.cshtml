@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GigHub.Models.Gig>
+@{
+    ViewBag.Title = "My Upcoming Gigs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>My Upcoming Gigs</h1>
+<ul class="gigs voffset4">
+    @foreach (var gig in Model)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @gig.DateTime.ToString("MMM")
+                </div>
+                <div class="year">
+                    @gig.DateTime.ToString("yyyy")
+                </div>
+                <div class="day">
+                    @gig.DateTime.ToString("d ")
+                </div>
+            </div>
+            <table class="details">
+                <tr>
+                    <td class="venue">
+                        @gig.Venue
+                    </td>
+                </tr>
+                <tr>
+                    <td class="genre">
+                        @gig.Genre.Name
+                    </td>
+                </tr>
+            </table>
+            <div class="gigs-list-space">
+            </div>
+        </li>
+    }
+</ul>

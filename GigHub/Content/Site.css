@@ -233,6 +233,6 @@ h1, h2, h3 {
     font-size: 15px;
 }
 
-.gigs > li .space {
+.gigs > li .gigs-list-space {
     flex: 3;
 }
