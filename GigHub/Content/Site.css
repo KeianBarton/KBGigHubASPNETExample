@@ -172,7 +172,7 @@ h1, h2, h3 {
 }
 
 .gigs > li .date {
-    background: red;
+    background: #8559da;
     transform: skewY(-4deg);
     transform-origin: top left;
     color: white;
