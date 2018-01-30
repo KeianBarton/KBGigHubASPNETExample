@@ -35,6 +35,10 @@ span.field-validation-error {
 .voffset4 { margin-top: 40px; }
 .voffset5 { margin-top: 80px; }
 
+.opacity-1 { opacity: 1; }
+.opacity-0-5 { opacity: 0.5; }
+.opacity-0-25 { opacity: 0.25; }
+
 /* Bootstrap overrides ----------------------------------------------------------- */
 .navbar-inverse {
     background-color: #140078;

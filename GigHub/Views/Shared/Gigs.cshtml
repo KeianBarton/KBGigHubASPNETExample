@@ -7,7 +7,7 @@
     @foreach(var gig in Model.UpcomingGigs)
     {
     <li>
-        <div class="date">
+        <div class="date @(@gig.IsCancelled ? "opacity-0-5" : "")">
             <div class="month">
                 @gig.DateTime.ToString("MMM")
             </div>
@@ -37,10 +37,17 @@
                     @gig.Genre.Name
                     @if (Model.ShowActions)
                     {
-                        <button data-gig-id="@gig.Id"
-                                class="btn btn-default btn-sm pull-right js-toggle-attendance">
-                            Going ?
-                        </button>
+                        if (gig.IsCancelled)
+                        {
+                            <span class="label label-warning pull-right">Cancelled</span>
+                        }
+                        else
+                        {
+                            <button data-gig-id="@gig.Id"
+                                    class="btn btn-default btn-sm pull-right js-toggle-attendance">
+                                Going ?
+                            </button>
+                        }
                     }
                 </td>
             </tr>
