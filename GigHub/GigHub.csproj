@@ -200,8 +200,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Apis\AttendancesController.cs" />
-    <Compile Include="Apis\FollowingsController.cs" />
+    <Compile Include="Controllers\Api\AttendancesController.cs" />
+    <Compile Include="Controllers\Api\FollowingsController.cs" />
+    <Compile Include="Controllers\Api\GigsController.cs" />
     <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +243,10 @@
     <Compile Include="Migrations\201801290913540_Add-Following.cs" />
     <Compile Include="Migrations\201801290913540_Add-Following.Designer.cs">
       <DependentUpon>201801290913540_Add-Following.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301038374_AddIsCancelledToGig.cs" />
+    <Compile Include="Migrations\201801301038374_AddIsCancelledToGig.Designer.cs">
+      <DependentUpon>201801301038374_AddIsCancelledToGig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -369,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801290913540_Add-Following.resx">
       <DependentUpon>201801290913540_Add-Following.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301038374_AddIsCancelledToGig.resx">
+      <DependentUpon>201801301038374_AddIsCancelledToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

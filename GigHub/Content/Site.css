@@ -240,7 +240,3 @@ h1, h2, h3 {
 .gigs > li:hover .actions {
     opacity: 1;
 }
-
-.gigs > li .actions a {
-    padding-right: 12px;
-}
