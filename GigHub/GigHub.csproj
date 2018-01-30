@@ -207,6 +207,8 @@
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Helpers\Notifications\INotificationHelper.cs" />
+    <Compile Include="Helpers\Notifications\NotificationHelper.cs" />
     <Compile Include="Dtos\AttendanceDto.cs" />
     <Compile Include="Dtos\FollowingDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,6 +250,10 @@
     <Compile Include="Migrations\201801301038374_AddIsCancelledToGig.Designer.cs">
       <DependentUpon>201801301038374_AddIsCancelledToGig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801301346194_AddNotification.cs" />
+    <Compile Include="Migrations\201801301346194_AddNotification.Designer.cs">
+      <DependentUpon>201801301346194_AddNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -255,6 +261,9 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Notifications\Notification.cs" />
+    <Compile Include="Models\Notifications\NotificationType.cs" />
+    <Compile Include="Models\Notifications\UserNotification.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\FollowingsViewModel.cs" />
@@ -377,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801301038374_AddIsCancelledToGig.resx">
       <DependentUpon>201801301038374_AddIsCancelledToGig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301346194_AddNotification.resx">
+      <DependentUpon>201801301346194_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
