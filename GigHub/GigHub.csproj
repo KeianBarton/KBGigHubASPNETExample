@@ -260,7 +260,6 @@
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Notifications\Notification.cs" />
-    <Compile Include="Models\Notifications\NotificationFactory.cs" />
     <Compile Include="Models\Notifications\NotificationType.cs" />
     <Compile Include="Models\Notifications\UserNotification.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />

@@ -37,9 +37,11 @@ namespace GigHub.Models.Notifications
                     return new Notification(gig, NotificationType.GigCreated);
 
                 case NotificationType.GigCreated:
-                    var notification = new Notification(gig, NotificationType.GigUpdated);
-                    notification.OriginalDateTime = dateTime;
-                    notification.OriginalVenue = venue;
+                    var notification = new Notification(gig, NotificationType.GigUpdated)
+                    {
+                        OriginalDateTime = dateTime,
+                        OriginalVenue = venue
+                    };
                     return notification;
 
                 case NotificationType.GigUpdated:
