@@ -29,7 +29,7 @@ namespace GigHub.Models
             // Do not delete gigs when we delete an attendnace
             modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Gig)
-                .WithMany()
+                .WithMany(g => g.Attendances)
                 .WillCascadeOnDelete(false);
 
             // Do not delete followers/followees when we delete a user
@@ -47,7 +47,7 @@ namespace GigHub.Models
             // Each user can have many user notifications
             modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
-                .WithMany()
+                .WithMany(u => u.UserNotifications)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
