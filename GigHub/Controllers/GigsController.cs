@@ -47,7 +47,7 @@ namespace GigHub.Controllers
                 Genres = _context.Genres.ToList()
             };
 
-            return View(viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
