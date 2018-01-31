@@ -18,11 +18,36 @@ namespace GigHub.Models.Notifications
         {
         }
 
-        public Notification(Gig gig, NotificationType notificationType)
+        private Notification(Gig gig, NotificationType notificationType)
         {
             DateTime = DateTime.Now;
             Gig = gig ?? throw new ArgumentNullException("gig");
             Type = notificationType;
+        }
+
+        public static Notification Factory_Gig(
+            Gig gig,
+            NotificationType notificationType,
+            DateTime? dateTime = null,
+            string venue = "")
+        {
+            switch (notificationType)
+            {
+                case NotificationType.GigCancelled:
+                    return new Notification(gig, NotificationType.GigCreated);
+
+                case NotificationType.GigCreated:
+                    var notification = new Notification(gig, NotificationType.GigUpdated);
+                    notification.OriginalDateTime = dateTime;
+                    notification.OriginalVenue = venue;
+                    return notification;
+
+                case NotificationType.GigUpdated:
+                    return new Notification(gig, NotificationType.GigUpdated);
+
+                default:
+                    throw new ArgumentException("notificationType");
+            }
         }
     }
 }
