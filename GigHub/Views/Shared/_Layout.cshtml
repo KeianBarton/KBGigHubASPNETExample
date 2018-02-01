@@ -93,12 +93,12 @@
     </script>
     <script>
         $(document).ready(function () {
-            $.getJSON("/api/notifications", function (notifications) {
+            $.getJSON("/api/notifications/getNew", function (notifications) {
                 if (notifications.length == 0) {
                     $(".notifications").popover({
                         title: "Notifications",
                         placement: "bottom",
-                        content: "You have no notifications"
+                        content: "You have no new notifications"
                     });
                     return;
                 }
@@ -121,6 +121,13 @@
                                 <h3 class="popover-title"></h3>
                                 <div class="popover-content"></div>
                                </div>`
+                }).on("shown.bs.popover", function () {
+                    $.post("/api/notifications/markAsRead")
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
+                        });
                 });
             });
         });
