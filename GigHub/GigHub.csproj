@@ -352,7 +352,6 @@
     <Content Include="Views\Shared\Followings.cshtml" />
     <Content Include="Views\Gigs\Mine.cshtml" />
     <Content Include="Views\Shared\_NotificationPartial.cshtml" />
-    <Content Include="Views\Shared\_NotificationPartialMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -148,8 +148,10 @@ h1, h2, h3 {
     display: none;
 }
 
-.nav.navbar-nav.navbar-right {
-    display: flex;
+@media (min-width: 768px) {
+    .nav.navbar-nav.navbar-right {
+        display: flex;
+    }
 }
 
 .dropdown-menu > li > a:hover,
