@@ -34,10 +34,10 @@ namespace GigHub.Models.Notifications
             switch (notificationType)
             {
                 case NotificationType.GigCancelled:
-                    return new Notification(gig, NotificationType.GigCreated);
+                    return new Notification(gig, NotificationType.GigCancelled);
 
                 case NotificationType.GigCreated:
-                    var notification = new Notification(gig, NotificationType.GigUpdated)
+                    var notification = new Notification(gig, NotificationType.GigCreated)
                     {
                         OriginalDateTime = dateTime,
                         OriginalVenue = venue

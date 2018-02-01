@@ -291,13 +291,30 @@
     <Compile Include="ViewModels\VerifyCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-overrides.css">
+      <DependentUpon>bootstrap-overrides.less</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-overrides.min.css">
+      <DependentUpon>bootstrap-overrides.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap-overrides.css" />
+    <None Include="Content\bootstrap-overrides.less" />
+    <Content Include="Content\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\site.css" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\colour-scheme.less" />
+    <None Include="Content\site.less" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

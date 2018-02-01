@@ -1,0 +1,182 @@
+﻿@import "colour-scheme.less";
+
+body {
+    padding-top: 90px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+
+
+/* User defined styling --------------------------------------------------- */
+
+// Field validation error
+field-validation-error {
+    color: @warning;
+    font-weight: bold;
+}
+
+// Scalable styles
+.voffset {
+    margin-top: 2px;
+}
+
+.voffset1 {
+    margin-top: 5px;
+}
+
+.voffset2 {
+    margin-top: 10px;
+}
+
+.voffset3 {
+    margin-top: 20px;
+}
+
+.voffset4 {
+    margin-top: 40px;
+}
+
+.voffset5 {
+    margin-top: 80px;
+}
+
+.opacity-1 {
+    opacity: 1;
+}
+
+.opacity-0-5 {
+    opacity: 0.5;
+}
+
+.opacity-0-25 {
+    opacity: 0.25;
+}
+
+// Gigs list
+.gigs {
+    list-style: none;
+
+    > li {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-bottom: 40px;
+
+        .date {
+            background: @std-lite;
+            transform: skewY(-4deg);
+            transform-origin: top left;
+            color: @txt-lite;
+            text-align: center;
+            margin: 0 auto;
+            flex: 1;
+            min-width: 60px;
+            max-width: 60px;
+            height: 70px;
+            position: relative;
+            border-radius: 8px;
+
+            .year {
+                background: @bgd-norm;
+                color: @txt-norm;
+                font-size: 12px;
+                text-align: center;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -7px;
+                transform: skewY(4deg);
+                border-radius: 8px;
+                padding-top: 16px;
+            }
+
+            .month {
+                text-transform: uppercase;
+                font-size: 16px;
+                font-weight: bold;
+                padding: 2px 6px 12px 6px;
+            }
+
+            .day {
+                background: @bgd-lite;
+                color: @txt-dark;
+                font-size: 20px;
+                padding: 6px 12px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 24px;
+            }
+        }
+
+        .details {
+            flex: 1;
+            margin-left: 16px;
+
+            .artist {
+                font-weight: bold;
+
+                .btn {
+                    color: @std-norm;
+                }
+            }
+
+            .genre {
+                font-size: 15px;
+            }
+        }
+
+        .actions {
+            color: @std-dark;
+            font-size: 15px;
+        }
+    }
+}
+
+// Notifications list
+.popover-notifications {
+    ul.notifications-list {
+        display: block;
+        list-style: none;
+        padding-left: 0;
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        > li {
+            border-bottom: 1px solid @bgd-norm;
+            padding: 12px;
+        }
+
+        > li:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .popover-content {
+        padding: 0;
+    }
+}

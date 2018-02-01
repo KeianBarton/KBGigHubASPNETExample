@@ -33,7 +33,18 @@ namespace GigHub.Models
 
         public Gig()
         {
+        }
+
+        public Gig(IEnumerable<ApplicationUser> followers)
+        {
             Attendances = new Collection<Attendance>();
+
+            var notification = Notification.Factory_Gig(this, NotificationType.GigCreated);
+
+            foreach (var follower in followers)
+            {
+                follower.Notify(notification);
+            }
         }
 
         public void Cancel()

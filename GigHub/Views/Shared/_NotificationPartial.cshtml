@@ -1,11 +1,10 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <div class="notifications">
-        <a class="link" href="#">
-            <i class="notification-globe glyphicon glyphicon-globe"></i>
-            <span class="badge js-notifications-count hide"></span>
-        </a>
-    </div>
+    <a class="link notifications" href="#" tabindex="0" role="button"
+        data-toggle="popover" data-trigger="focus">
+        <i class="notification-globe glyphicon glyphicon-globe"></i>
+        <span class="badge js-notifications-count hide"></span>
+    </a>
 }
 else
 {

@@ -82,9 +82,15 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
-            var gig = new Gig
+            var userId = User.Identity.GetUserId();
+
+            var followers = _context.Followings
+                .Where(f => f.FolloweeId == userId)
+                .Select(f => f.Follower);
+
+            var gig = new Gig(followers)
             {
-                ArtistId = User.Identity.GetUserId(),
+                ArtistId = userId,
                 DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue,
