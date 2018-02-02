@@ -145,5 +145,22 @@ namespace GigHub.Controllers
             return RedirectToAction("Index", "Home",
                 new { query = viewModel.SearchTerm });
         }
+
+        public ActionResult Details(int id)
+        {
+            var gig = _context.Gigs
+                .Include(g => g.Artist)
+                .Single(g => g.Id == id);
+
+            var viewModel = new GigDetailsViewModel
+            {
+                ArtistName = gig.Artist.Name,
+                Date = gig.DateTime.ToString("d MMM yyyy"),
+                Time = gig.DateTime.ToString("HH:mm"),
+                Venue = gig.Venue
+            };
+
+            return View("Details", viewModel);
+        }
     }
 }
