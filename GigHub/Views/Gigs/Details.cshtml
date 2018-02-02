@@ -1,18 +1,19 @@
 ﻿@model GigHub.ViewModels.GigDetailsViewModel
 @{
-    ViewBag.Title = Model.Heading;
+    ViewBag.Title = "Gig Details - " + Model.Gig.Artist.Name;
 }
-<h2>@Model.ArtistName
+<h2>@Model.Gig.Artist.Name
     @if (Request.IsAuthenticated)
     {
-        <button data-user-id="@Model.ArtistId"
+        <button data-user-id="@Model.Gig.ArtistId"
                 class="btn btn-sm js-toggle-follow follow-btn">
             Follow
         </button>
     }
     </h2>
-<p>Performing at @Model.Venue on @Model.Date at @Model.Time</p>
-@if (Request.IsAuthenticated && Model.IsGoing)
+<p>Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM")
+    at @Model.Gig.DateTime.ToString("HH:mm")</p>
+@if (User.Identity.IsAuthenticated && Model.IsAttending)
 {
     <p>You are going to this event.</p>
 }
@@ -21,6 +22,7 @@
     <script>
         $(document).ready(function () {
             var True = true;
+            var False = false;
             if (@Model.IsFollowing)
             {
                 $(".js-toggle-follow")

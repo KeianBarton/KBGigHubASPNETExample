@@ -151,29 +151,23 @@ namespace GigHub.Controllers
         {
             var gig = _context.Gigs
                 .Include(g => g.Artist)
-                .Include(g => g.Artist.Followers)
-                .Include(g => g.Attendances)
                 .Single(g => g.Id == id);
 
-            var userId = User.Identity.GetUserId();
-            var isGoing = (gig.Attendances
-                .Select(a => a.AttendeeId)
-                .Contains(userId));
-            var isFollowing = (gig.Artist.Followers
-                .Select(f => f.FollowerId)
-                .Contains(userId));
+            if (gig == null)
+                return HttpNotFound();
 
-            var viewModel = new GigDetailsViewModel
+            var viewModel = new GigDetailsViewModel { Gig = gig };
+
+            if (User.Identity.IsAuthenticated)
             {
-                Heading = "Gig Details",
-                ArtistName = gig.Artist.Name,
-                ArtistId = gig.ArtistId,
-                Date = gig.DateTime.ToString("d MMM yyyy"),
-                Time = gig.DateTime.ToString("HH:mm"),
-                Venue = gig.Venue,
-                IsGoing = isGoing,
-                IsFollowing = isFollowing
-            };
+                var userId = User.Identity.GetUserId();
+
+                viewModel.IsAttending = _context.Attendances
+                    .Any(a => a.GigId == gig.Id && a.AttendeeId == userId);
+
+                viewModel.IsFollowing = _context.Followings
+                    .Any(f => f.FolloweeId == gig.ArtistId && f.FollowerId == userId);
+            }
 
             return View("Details", viewModel);
         }

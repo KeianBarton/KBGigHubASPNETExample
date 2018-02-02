@@ -140,13 +140,20 @@ field-validation-error {
             .artist {
                 font-weight: bold;
 
-                .btn {
+                .btn:enabled {
                     color: @std-norm;
                 }
             }
 
             .genre {
                 font-size: 15px;
+
+                .label-info {
+                    border-radius: 6px;
+                    background-color: @std-norm;
+                    padding: 10px 8px;
+                    margin-left: 100px;
+                }
             }
         }
 
@@ -189,8 +196,13 @@ field-validation-error {
     }
 }
 
+.follow-btn {
+    margin-left: 12px;
+}
+
 .follow-btn:disabled {
     background-color: @std-norm;
     color: @txt-lite;
     opacity: 1;
+    margin-left: 12px;
 }

@@ -2,6 +2,7 @@
 @model GigHub.ViewModels.GigsViewModel
 @{
     ViewBag.Title = Model.Heading;
+    var userId = User.Identity.GetUserId();
 }
 <h1>@Model.Heading</h1>
 @using (Html.BeginForm("Search", "Gigs",
@@ -44,10 +45,20 @@
                                 new { id = gig.Id })">@gig.Artist.Name</a>
                         @if (Model.ShowActions)
                         {
-                            <button data-user-id="@gig.ArtistId"
-                                class="btn btn-link btn-sm pull-right js-toggle-follow">
-                                Follow
-                            </button>
+                            if (gig.Artist.Followers.Any(f => f.FollowerId == userId))
+                            {
+                                <button data-user-id="@gig.ArtistId"
+                                    class="btn btn-sm follow-btn pull-right js-toggle-follow" disabled>
+                                    Following
+                                </button>
+                            }
+                            else if(gig.ArtistId != userId)
+                            {
+                                <button data-user-id="@gig.ArtistId"
+                                    class="btn btn-sm follow-btn btn-default pull-right js-toggle-follow">
+                                    Follow
+                                </button>
+                            }
                         }
                     </td>
                 </tr>
@@ -60,7 +71,7 @@
                             {
                                 <span class="label label-warning pull-right">Cancelled</span>
                             }
-                            else if (gig.ArtistId == User.Identity.GetUserId())
+                            else if (gig.ArtistId == userId)
                             {
                                 <span class="label label-info pull-right">Your Gig</span>
                             }
