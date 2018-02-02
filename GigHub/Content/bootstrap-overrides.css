@@ -182,12 +182,12 @@ body h3 .h6 {
 }
 .notifications {
   display: flex;
-  flex: 1;
   position: relative;
   color: #ffffff;
   font-size: 20px;
   padding: 10px 16px;
   margin-left: auto;
+  justify-content: flex-end;
 }
 .notifications .badge {
   position: absolute;
@@ -202,4 +202,21 @@ body h3 .h6 {
   background-color: #512da8;
   text-decoration: none;
   outline: none;
+}
+.search-gig-form {
+  margin: auto;
+}
+.search-gig-form .gig-search-bar {
+  display: flex;
+  width: 100%;
+  margin-top: 24px;
+}
+.search-gig-form .gig-search-bar .form-control {
+  max-width: none;
+}
+.search-gig-form .gig-search-bar #gig-search-icon {
+  min-width: 40px;
+}
+.search-gig-form .gig-search-bar #gig-search-icon .glyphicon-search {
+  top: 6px;
 }

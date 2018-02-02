@@ -193,12 +193,12 @@ body {
 
 .notifications {
     display: flex;
-    flex: 1;
     position: relative;
     color: @txt-lite;
     font-size: 20px;
     padding: 10px 16px;
     margin-left: auto;
+    justify-content: flex-end;
 
     .badge {
         position: absolute;
@@ -215,4 +215,26 @@ body {
     background-color: @std-norm;
     text-decoration: none;
     outline: none;
+}
+
+.search-gig-form {
+    margin: auto;
+
+    .gig-search-bar {
+        display: flex;
+        width: 100%;
+        margin-top: 24px;
+
+        .form-control {
+            max-width: none;
+        }
+
+        #gig-search-icon {
+            min-width: 40px;
+
+            .glyphicon-search {
+                top: 6px;
+            }
+        }
+    }
 }
