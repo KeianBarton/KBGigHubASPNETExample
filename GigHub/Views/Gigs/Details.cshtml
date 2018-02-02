@@ -2,5 +2,45 @@
 @{
     ViewBag.Title = Model.Heading;
 }
-<h2>@Model.ArtistName</h2>
+<h2>@Model.ArtistName
+    @if (Request.IsAuthenticated)
+    {
+        <button data-user-id="@Model.ArtistId"
+                class="btn btn-sm js-toggle-follow follow-btn">
+            Follow
+        </button>
+    }
+    </h2>
+<p>Performing at @Model.Venue on @Model.Date at @Model.Time</p>
+@if (Request.IsAuthenticated && Model.IsGoing)
+{
+    <p>You are going to this event.</p>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var True = true;
+            if (@Model.IsFollowing)
+            {
+                $(".js-toggle-follow")
+                    .text("Following")
+                    .prop("disabled", true);
+            }
 
+            $(".js-toggle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/followings",
+                    // has to be in object body as expected in controller
+                    { followeeId: button.attr("data-user-id") })
+                    .done(function () { // success callback
+                        button.text("Following");
+                        button.prop("disabled", true);
+                    })
+                    .fail(function () {
+                        alert("Something failed!");
+                    });
+            });
+        });
+    </script>
+}

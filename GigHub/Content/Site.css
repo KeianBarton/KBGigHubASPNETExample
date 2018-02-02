@@ -145,3 +145,8 @@ field-validation-error {
 .popover-notifications .popover-content {
   padding: 0;
 }
+.follow-btn:disabled {
+  background-color: #512da8;
+  color: #ffffff;
+  opacity: 1;
+}
