@@ -42,50 +42,54 @@
         <ul class="notifications-list">
             <%
             _.each(notifications, function(n) {
-            switch (n.type) {
-            case 1: %>
-            <li>
-                <span class="highlight"><%= n.gig.artist.name %></span>
-                has cancelled the gig at
-                <span class="highlight"><%= n.gig.venue %></span>
-                on
-                <span class="highlight"><%= moment(n.gig.dateTime).format("D MMM HH:mm") %></span>
-            </li>
-            <% break;
-            case 2:
-            var changes = [],
-            originalValues = [],
-            newValues = [];
+            console.log(n);
+                switch (n.type) {
+                case 1: %>
+                <li>
+                    <p class="notification-time"><%= moment(n.dateTime).format("D MMM HH:mm") %></p>
+                    <span class="highlight"><%= n.gig.artist.name %></span>
+                    has cancelled the gig at
+                    <span class="highlight"><%= n.gig.venue %></span>
+                    on
+                    <span class="highlight"><%= moment(n.gig.dateTime).format("D MMM HH:mm") %></span>
+                </li>
+                <% break;
+                case 2:
+                var changes = [],
+                originalValues = [],
+                newValues = [];
 
-            if (n.originalVenue != n.gig.Venue) {
-            changes.push('venue');
-            originalValues.push(n.originalVenue);
-            newValues.push(n.gig.venue);
-            }
+                if (n.originalVenue != n.gig.Venue) {
+                    changes.push('venue');
+                    originalValues.push(n.originalVenue);
+                    newValues.push(n.gig.venue);
+                }
 
-            if (n.originalDateTime != n.gig.dateTime) {
-            changes.push('date/time');
-            originalValues.push(moment(n.originalDateTime)).format("D MMM HH:mm");
-            newValues.push(moment(n.gig.dateTime)).format("D MMM HH:mm");
-            } %>
-            <li>
-                <span class="highlight"><%= n.gig.artist.name %></span>
-                has changed the
-                <span class="highlight"><%= changes.join(' and ') %></span>
-                of the gig from
-                <span class="highlight"><% originalValues.join('/') %></span>
-                to
-                <span class="highlight"><% newValues.join('/') %></span>
-            </li>
-            <% break;
-            case 3: %>
-            <li>
-                <span class="highlight"><%= n.gig.artist.name %></span>
-                is performing at
-                <span class="highlight"><%= n.gig.venue %></span>
-                on
-                <span class="highlight"><%= moment(n.gig.dateTime).format("D MMM HH:mm") %></span>
-            </li>
+                if (n.originalDateTime != n.gig.dateTime) {
+                    changes.push('date/time');
+                    originalValues.push(moment(n.originalDateTime)).format("D MMM HH:mm");
+                    newValues.push(moment(n.gig.dateTime)).format("D MMM HH:mm");
+                } %>
+                <li>
+                    <p class="notification-time"><%= moment(n.dateTime).format("D MMM HH:mm") %></p>
+                    <span class="highlight"><%= n.gig.artist.name %></span>
+                    has changed the
+                    <span class="highlight"><%= changes.join(' and ') %></span>
+                    of the gig from
+                    <span class="highlight"><% originalValues.join('/') %></span>
+                    to
+                    <span class="highlight"><% newValues.join('/') %></span>
+                </li>
+                <% break;
+                case 3: %>
+                <li>
+                    <p class="notification-time"><%= moment(n.dateTime).format("D MMM HH:mm") %></p>
+                    <span class="highlight"><%= n.gig.artist.name %></span>
+                    is performing at
+                    <span class="highlight"><%= n.gig.venue %></span>
+                    on
+                    <span class="highlight"><%= moment(n.gig.dateTime).format("D MMM HH:mm") %></span>
+                </li>
             <% }
             })
             %>
@@ -93,12 +97,12 @@
     </script>
     <script>
         $(document).ready(function () {
-            $.getJSON("/api/notifications/getNew", function (notifications) {
+            $.getJSON("/api/notifications/getNotifications", function (notifications) {
                 if (notifications.length == 0) {
                     $(".notifications").popover({
                         title: "Notifications",
                         placement: "bottom",
-                        content: "You have no new notifications"
+                        content: "You have no notifications"
                     });
                     return;
                 }
