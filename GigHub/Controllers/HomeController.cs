@@ -16,7 +16,7 @@ namespace GigHub.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string query = null)
         {
             var upcomingGigs = _context.Gigs
                 .Include(g => g.Artist)
@@ -25,11 +25,21 @@ namespace GigHub.Controllers
                     g.DateTime > DateTime.Now && 
                     !g.IsCancelled);
 
+            if(!String.IsNullOrWhiteSpace(query))
+            {
+                upcomingGigs = upcomingGigs
+                    .Where(g =>
+                        g.Artist.Name.Contains(query) ||
+                        g.Genre.Name.Contains(query) ||
+                        g.Venue.Contains(query));
+            }
+
             var viewModel = new GigsViewModel
             {
                 UpcomingGigs = upcomingGigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Upcoming Gigs"
+                Heading = "Upcoming Gigs",
+                SearchTerm = query
             };
 
             return View("Gigs", viewModel);

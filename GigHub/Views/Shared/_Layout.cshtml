@@ -132,5 +132,9 @@
             });
         });
     </script>
+    <script>
+        // Stop links with href="#" navigating you to that URL
+        $('a[href^=#]').click(function (e) { e.preventDefault(); });
+    </script>
 </body>
 </html>

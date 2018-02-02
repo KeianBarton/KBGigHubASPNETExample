@@ -13,11 +13,12 @@
             @Html.TextBoxFor(m => m.SearchTerm, new
             {
                 @class = "form-control",
-                @placeholder = "Search for gig"
+                @placeholder = "Search for artist, genre or location..."
             })
-            <span class="input-group-addon" id="gig-search-icon">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
+            <div class="input-group-addon">
+                <input value="" type="submit" />
+                <i class="glyphicon glyphicon-search" id="gig-search-icon"></i>
+            </div>
         </div>
     </div>
 }

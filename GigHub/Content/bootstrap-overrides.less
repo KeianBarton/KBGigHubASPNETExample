@@ -1,6 +1,6 @@
 ﻿@import "colour-scheme.less";
 
-a {
+a, a:hover, a:focus {
     color: @std-dark;
     font-weight: bold;
 }
@@ -229,11 +229,31 @@ body {
             max-width: none;
         }
 
-        #gig-search-icon {
+        .input-group-addon {
             min-width: 40px;
 
-            .glyphicon-search {
-                top: 6px;
+            input {
+                border: none;
+                background: none;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 40px;
+                outline: none;
+            }
+
+            input:focus {
+                border: @std-norm 1px solid;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            #gig-search-icon {
+                top: 8px;
             }
         }
     }
