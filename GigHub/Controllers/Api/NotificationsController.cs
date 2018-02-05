@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace GigHub.Controllers.Api
@@ -33,7 +34,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult MarkAsRead()
+        public async Task<IHttpActionResult> MarkAsRead()
         {
             var userId = User.Identity.GetUserId();
             var userNotifications = _context.UserNotifications
@@ -42,7 +43,7 @@ namespace GigHub.Controllers.Api
 
             userNotifications.ForEach(u => u.MarkAsRead());
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }
