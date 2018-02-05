@@ -112,15 +112,15 @@ field-validation-error {
 .gigs > li .details .artist {
   font-weight: bold;
 }
-.gigs > li .details .artist .btn:enabled {
-  color: #512da8;
+.gigs > li .details .artist .btn.btn-default {
+  color: #341d6c;
 }
 .gigs > li .details .genre {
   font-size: 15px;
 }
 .gigs > li .details .genre .label-info {
   border-radius: 6px;
-  background-color: #512da8;
+  background-color: #341d6c;
   padding: 10px 8px;
   margin-left: 100px;
 }
@@ -151,12 +151,15 @@ field-validation-error {
 .popover-notifications .popover-content {
   padding: 0;
 }
-.follow-btn {
-  margin-left: 12px;
-}
-.follow-btn:disabled {
+.btn-info {
+  border: none;
   background-color: #512da8;
   color: #ffffff;
   opacity: 1;
   margin-left: 12px;
+}
+.btn-info:hover,
+.btn-info:focus {
+  background-color: #7651d0;
+  border-color: #7651d0;
 }

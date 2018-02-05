@@ -43,22 +43,14 @@
                     <td class="artist">
                         <a href="@Url.Action("Details","Gigs",
                                 new { id = gig.Id })">@gig.Artist.Name</a>
-                        @if (Model.ShowActions)
+                        @if (Model.ShowActions && gig.ArtistId != userId)
                         {
-                            if (gig.Artist.Followers.Any(f => f.FollowerId == userId))
-                            {
-                                <button data-user-id="@gig.ArtistId"
-                                    class="btn btn-sm follow-btn pull-right js-toggle-follow" disabled>
-                                    Following
-                                </button>
-                            }
-                            else if(gig.ArtistId != userId)
-                            {
-                                <button data-user-id="@gig.ArtistId"
-                                    class="btn btn-sm follow-btn btn-default pull-right js-toggle-follow">
-                                    Follow
-                                </button>
-                            }
+                            <button data-user-id="@gig.ArtistId"
+                                class="btn btn-sm follow-btn
+                                @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ? "btn-info" : "btn-default")
+                                    pull-right js-toggle-follow">
+                                Following
+                            </button>
                         }
                     </td>
                 </tr>
@@ -78,8 +70,10 @@
                             else
                             {
                                 <button data-gig-id="@gig.Id"
-                                        class="btn btn-default btn-sm pull-right js-toggle-attendance">
-                                    Going ?
+                                        class="btn btn
+                                        @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
+                                        btn-sm pull-right js-toggle-attendance">
+                                    Going
                                 </button>
                             }
                         }
@@ -104,7 +98,6 @@
                         button
                             .removeClass("btn-default")
                             .addClass("btn-info")
-                            .text("Going");
                     })
                     .fail(function () {
                         alert("Something failed!");

@@ -4,10 +4,10 @@
     ViewBag.Title = "Gig Details - " + Model.Gig.Artist.Name;
 }
 <h2>@Model.Gig.Artist.Name
-    @if (User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != User.Identity.GetUserId())
     {
         <button data-user-id="@Model.Gig.ArtistId"
-                class="btn btn-sm js-toggle-follow follow-btn">
+                class="btn btn-sm btn-default js-toggle-follow follow-btn">
             Follow
         </button>
     }
@@ -28,13 +28,8 @@
             {
                 $(".js-toggle-follow")
                     .text("Following")
-                    .prop("disabled", true);
-                return;
-            }
-            if ("@Model.Gig.ArtistId" == "@User.Identity.GetUserId()")
-            {
-                $(".js-toggle-follow")
-                    .hide();
+                    .removeClass("btn-default")
+                    .addClass("btn-info");
                 return;
             }
 

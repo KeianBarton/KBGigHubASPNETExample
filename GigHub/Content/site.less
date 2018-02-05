@@ -140,8 +140,8 @@ field-validation-error {
             .artist {
                 font-weight: bold;
 
-                .btn:enabled {
-                    color: @std-norm;
+                .btn.btn-default {
+                    color: @std-dark;
                 }
             }
 
@@ -150,7 +150,7 @@ field-validation-error {
 
                 .label-info {
                     border-radius: 6px;
-                    background-color: @std-norm;
+                    background-color: @std-dark;
                     padding: 10px 8px;
                     margin-left: 100px;
                 }
@@ -196,13 +196,16 @@ field-validation-error {
     }
 }
 
-.follow-btn {
-    margin-left: 12px;
-}
-
-.follow-btn:disabled {
+.btn-info {
+    border: none;
     background-color: @std-norm;
     color: @txt-lite;
     opacity: 1;
     margin-left: 12px;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background-color: @std-lite;
+    border-color: @std-lite;
 }
