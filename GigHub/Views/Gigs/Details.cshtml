@@ -1,9 +1,10 @@
-﻿@model GigHub.ViewModels.GigDetailsViewModel
+﻿@using Microsoft.AspNet.Identity
+@model GigHub.ViewModels.GigDetailsViewModel
 @{
     ViewBag.Title = "Gig Details - " + Model.Gig.Artist.Name;
 }
 <h2>@Model.Gig.Artist.Name
-    @if (Request.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
     {
         <button data-user-id="@Model.Gig.ArtistId"
                 class="btn btn-sm js-toggle-follow follow-btn">
@@ -28,6 +29,13 @@
                 $(".js-toggle-follow")
                     .text("Following")
                     .prop("disabled", true);
+                return;
+            }
+            if ("@Model.Gig.ArtistId" == "@User.Identity.GetUserId()")
+            {
+                $(".js-toggle-follow")
+                    .hide();
+                return;
             }
 
             $(".js-toggle-follow").click(function (e) {
