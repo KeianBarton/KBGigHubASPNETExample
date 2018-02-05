@@ -137,23 +137,42 @@ field-validation-error {
             flex: 1;
             margin-left: 16px;
 
+            .btn-default {
+                color: @std-dark;
+                margin-left: 16px;
+                width: 80px;
+            }
+
+            .btn-info {
+                border: none;
+                background-color: @std-norm;
+                color: @txt-lite;
+                opacity: 1;
+                margin-left: 16px;
+                width: 80px;
+            }
+
+            .btn-info:hover,
+            .btn-info:focus {
+                background-color: @std-lite;
+                border-color: @std-lite;
+            }
+
+
+            .label-info {
+                border-radius: 6px;
+                background-color: @std-dark;
+                padding: 10px 8px;
+                margin-left: 16px;
+                width: 80px;
+            }
+
             .artist {
                 font-weight: bold;
-
-                .btn.btn-default {
-                    color: @std-dark;
-                }
             }
 
             .genre {
                 font-size: 15px;
-
-                .label-info {
-                    border-radius: 6px;
-                    background-color: @std-dark;
-                    padding: 10px 8px;
-                    margin-left: 100px;
-                }
             }
         }
 
@@ -194,18 +213,4 @@ field-validation-error {
     .popover-content {
         padding: 0;
     }
-}
-
-.btn-info {
-    border: none;
-    background-color: @std-norm;
-    color: @txt-lite;
-    opacity: 1;
-    margin-left: 12px;
-}
-
-.btn-info:hover,
-.btn-info:focus {
-    background-color: @std-lite;
-    border-color: @std-lite;
 }

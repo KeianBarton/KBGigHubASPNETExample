@@ -43,15 +43,23 @@
                     <td class="artist">
                         <a href="@Url.Action("Details","Gigs",
                                 new { id = gig.Id })">@gig.Artist.Name</a>
-                        @if (Model.ShowActions && gig.ArtistId != userId)
+                        @if (Model.ShowActions)
                         {
-                            <button data-user-id="@gig.ArtistId"
-                                class="btn btn-sm follow-btn
-                                @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ? "btn-info" : "btn-default")
-                                    pull-right js-toggle-follow">
-                                Following
-                            </button>
+                            if(gig.ArtistId != userId)
+                            {
+                                <button data-user-id="@gig.ArtistId"
+                                    class="btn btn-sm follow-btn
+                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ? "btn-info" : "btn-default")
+                                        pull-right js-toggle-follow">
+                                    Following
+                                </button>
+                            }
+                            else
+                            {
+                                <span class="label label-info pull-right">Your Gig</span>
+                            }
                         }
+
                     </td>
                 </tr>
                 <tr>
@@ -63,11 +71,7 @@
                             {
                                 <span class="label label-warning pull-right">Cancelled</span>
                             }
-                            else if (gig.ArtistId == userId)
-                            {
-                                <span class="label label-info pull-right">Your Gig</span>
-                            }
-                            else
+                            else if (gig.ArtistId != userId)
                             {
                                 <button data-gig-id="@gig.Id"
                                         class="btn btn
@@ -123,16 +127,36 @@
 
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/followings",
-                    // has to be in object body as expected in controller
-                    { followeeId: button.attr("data-user-id") })
-                    .done(function () { // success callback
-                        button.text("Following");
-                        button.prop("disabled", true);
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/followings",
+                        // has to be in object body as expected in controller
+                        { followeeId: button.attr("data-user-id") })
+                        .done(function () { // success callback
+                            _.each($(".follow-btn"), function (btn) {
+                                $(btn).removeClass("btn-default")
+                                 .addClass("btn-info")
+                                 .text("Following")
+                            });
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("data-user-id"),
+                        method: "DELETE"
                     })
-                    .fail(function () {
-                        alert("Something failed!");
-                    });
+                        .done(function () {
+                            _.each($(".follow-btn"), function (btn) {
+                                $(btn).removeClass("btn-info")
+                                 .addClass("btn-default")
+                                 .text("Follow")
+                            });
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                }
             });
         });
     </script>
