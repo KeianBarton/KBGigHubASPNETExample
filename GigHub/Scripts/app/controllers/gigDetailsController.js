@@ -1,21 +1,23 @@
 ﻿var GigDetailsController = function (followingService) {
 
+    var button;
+
     var init = function (container) {
         $(container).on("click", ".js-toggle-follow", toggleFollowing);
     };
 
     var toggleFollowing = function (e) {
-        var button = $(e.target);
+        button = $(e.target);
         var userId = button.attr("data-user-id");
         if (button.hasClass("btn-default"))
             followingService.createFollowing(
-                userId, function () { toggleButton(button, "Following"); }, fail);
+                userId, function () { toggleButton("Following"); }, fail);
         else
             followingService.deleteFollowing(
-                userId, function () { toggleButton(button, "Follow"); }, fail);
+                userId, function () { toggleButton("Follow"); }, fail);
     };
 
-    var toggleButton = function (button, text) {
+    var toggleButton = function (text) {
         button
             .toggleClass("btn-info")
             .toggleClass("btn-default")
