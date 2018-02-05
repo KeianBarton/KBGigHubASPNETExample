@@ -4,73 +4,30 @@
     ViewBag.Title = "Gig Details - " + Model.Gig.Artist.Name;
     var userId = User.Identity.GetUserId();
 }
-<h2>@Model.Gig.Artist.Name
-    @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != userId)
-    {
+<div id="gig-details">
+    <h2>@Model.Gig.Artist.Name
+        @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != userId)
+        {
         <button data-user-id="@Model.Gig.ArtistId"
-            class="btn btn-sm follow-btn
-            @(Model.Gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
-                "btn-info" : "btn-default")
-                js-toggle-follow">
-            Following
+                class="btn btn-sm follow-btn
+                @(Model.IsFollowing ? "btn-info" : "btn-default")
+                    js-toggle-follow">
+            @(Model.IsFollowing ? "Following" : "Follow")
         </button>
+        }
+        </h2>
+    <p>Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM")
+        at @Model.Gig.DateTime.ToString("HH:mm")</p>
+    @if (User.Identity.IsAuthenticated && Model.IsAttending)
+    {
+        <p>You are going to this event.</p>
     }
-    </h2>
-<p>Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("d MMM")
-    at @Model.Gig.DateTime.ToString("HH:mm")</p>
-@if (User.Identity.IsAuthenticated && Model.IsAttending)
-{
-    <p>You are going to this event.</p>
-}
+</div>
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            if (@Model.IsFollowing.ToString().ToLower()) {
-                $(".follow-btn")
-                    .removeClass("btn-default")
-                    .addClass("btn-info")
-                    .text("Following")
-            } else {
-                $(".follow-btn")
-                    .removeClass("btn-info")
-                    .addClass("btn-default")
-                    .text("Follow")
-            }
-
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/followings",
-                        // has to be in object body as expected in controller
-                        { followeeId: button.attr("data-user-id") })
-                        .done(function () { // success callback
-                            _.each($(".follow-btn"), function (btn) {
-                                $(btn).removeClass("btn-default")
-                                 .addClass("btn-info")
-                                 .text("Following")
-                            });
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/followings/" + button.attr("data-user-id"),
-                        method: "DELETE"
-                    })
-                        .done(function () {
-                            _.each($(".follow-btn"), function (btn) {
-                                $(btn).removeClass("btn-info")
-                                 .addClass("btn-default")
-                                 .text("Follow")
-                            });
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                }
-            });
+            GigDetailsController.init($("#gig-details"));
         });
     </script>
 }

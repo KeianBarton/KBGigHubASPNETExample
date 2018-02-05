@@ -7,6 +7,13 @@ namespace GigHub
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            // App scripts
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/Scripts/app/services/*.js",
+                        "~/Scripts/app/controllers/*.js",
+                        "~/Scripts/app/app.js"
+                        ));
+
             // Third party libraries
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/underscore-min.js",

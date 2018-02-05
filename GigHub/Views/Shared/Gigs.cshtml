@@ -23,7 +23,7 @@
         </div>
     </div>
 }
-<ul class="gigs voffset4">
+<ul id="gigs" class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -45,16 +45,18 @@
                                 new { id = gig.Id })">@gig.Artist.Name</a>
                         @if (Model.ShowActions)
                         {
-                            if(gig.ArtistId != userId)
+                            if(gig.ArtistId != userId && !gig.IsCancelled)
                             {
-                                <button data-user-id="@gig.ArtistId"
-                                    class="btn btn-sm follow-btn
-                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
-                                        "btn-info" : "btn-default")
-                                        pull-right js-toggle-follow">
-                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
-                                        "Following" : "Follow")
+                                <button data-gig-id="@gig.Id"
+                                        class="btn going-btn
+                                        @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
+                                        btn-sm pull-right js-toggle-attendance">
+                                    @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going ?")
                                 </button>
+                            }
+                            else if(gig.IsCancelled)
+                            {
+                                <span class="label label-warning pull-right">Cancelled</span>
                             }
                             else
                             {
@@ -67,22 +69,6 @@
                 <tr>
                     <td class="genre">
                         @gig.Genre.Name
-                        @if (Model.ShowActions)
-                        {
-                            if (gig.IsCancelled)
-                            {
-                                <span class="label label-warning pull-right">Cancelled</span>
-                            }
-                            else if (gig.ArtistId != userId)
-                            {
-                                <button data-gig-id="@gig.Id"
-                                        class="btn going-btn
-                                        @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
-                                        btn-sm pull-right js-toggle-attendance">
-                                    @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going ?")
-                                </button>
-                            }
-                        }
                     </td>
                 </tr>
             </table>
@@ -95,71 +81,7 @@
 {
     <script>
         $(document).ready(function () {
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/attendances",
-                        // has to be in object body as expected in controller
-                        { gigId: button.attr("data-gig-id") })
-                        .done(function () { // success callback
-                            button
-                                .removeClass("btn-default")
-                                .addClass("btn-info")
-                                .text("Going")
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/attendances/" + button.attr("data-gig-id"),
-                        method: "DELETE"
-                    })
-                    .done(function() {
-                        button
-                            .removeClass("btn-info")
-                            .addClass("btn-default")
-                            .text("Going ?")
-                    })
-                    .fail(function () {
-                        alert("Something failed!");
-                    });
-                }
-            });
-
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass("btn-default")) {
-                    $.post("/api/followings",
-                        // has to be in object body as expected in controller
-                        { followeeId: button.attr("data-user-id") })
-                        .done(function () { // success callback
-                            _.each($(".follow-btn"), function (btn) {
-                                $(btn).removeClass("btn-default")
-                                 .addClass("btn-info")
-                                 .text("Following")
-                            });
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/followings/" + button.attr("data-user-id"),
-                        method: "DELETE"
-                    })
-                        .done(function () {
-                            _.each($(".follow-btn"), function (btn) {
-                                $(btn).removeClass("btn-info")
-                                 .addClass("btn-default")
-                                 .text("Follow")
-                            });
-                        })
-                        .fail(function () {
-                            alert("Something failed!");
-                        });
-                }
-            });
+            GigsController.init($("#gigs"));
         });
     </script>
 }
