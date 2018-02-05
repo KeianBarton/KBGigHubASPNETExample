@@ -38,41 +38,34 @@
                     @gig.DateTime.ToString("d ")
                 </div>
             </div>
-            <table class="details">
-                <tr>
-                    <td class="artist">
-                        <a href="@Url.Action("Details","Gigs",
-                                new { id = gig.Id })">@gig.Artist.Name</a>
-                        @if (Model.ShowActions)
+            <div class="details">
+                <a class="artist" href="@Url.Action("Details","Gigs",
+                        new { id = gig.Id })">@gig.Artist.Name</a>
+                <div class="genre">
+                    @gig.Genre.Name
+                </div>
+                <div class="going-section">
+                    @if (Model.ShowActions)
+                    {
+                        if(gig.ArtistId != userId && !gig.IsCancelled)
                         {
-                            if(gig.ArtistId != userId && !gig.IsCancelled)
-                            {
-                                <button data-gig-id="@gig.Id"
-                                        class="btn going-btn
-                                        @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
-                                        btn-sm pull-right js-toggle-attendance">
-                                    @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going ?")
-                                </button>
-                            }
-                            else if(gig.IsCancelled)
-                            {
-                                <span class="label label-warning pull-right">Cancelled</span>
-                            }
-                            else
-                            {
-                                <span class="label label-warning pull-right">Your Gig</span>
-                            }
+                            <button data-gig-id="@gig.Id"
+                                    class="btn going-btn
+                                    @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
+                                    btn-sm js-toggle-attendance">
+                                @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going ?")
+                            </button>
                         }
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="genre">
-                        @gig.Genre.Name
-                    </td>
-                </tr>
-            </table>
-            <div class="gigs-list-space">
+                        else if(gig.IsCancelled)
+                        {
+                            <span class="label label-warning">Cancelled</span>
+                        }
+                        else
+                        {
+                            <span class="label label-warning">Your Gig</span>
+                        }
+                    }
+                </div>
             </div>
         </li>
     }

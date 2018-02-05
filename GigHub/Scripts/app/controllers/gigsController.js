@@ -18,7 +18,7 @@
     };
 
     var toggleButton = function () {
-        var text = (button.text() === "Going ?") ? "Going" : "Going ?";
+        var text = (button.text().trim() == "Going ?") ? "Going" : "Going ?";
         button
             .toggleClass("btn-info")
             .toggleClass("btn-default")

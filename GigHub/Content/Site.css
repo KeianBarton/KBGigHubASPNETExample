@@ -145,7 +145,6 @@ field-validation-error {
 .follow-btn.btn-default,
 .going-btn.btn-default {
   color: #341d6c;
-  margin-left: 16px;
   width: 80px;
 }
 .follow-btn.btn-info,
@@ -154,7 +153,6 @@ field-validation-error {
   background-color: #512da8;
   color: #ffffff;
   opacity: 1;
-  margin-left: 16px;
   width: 80px;
 }
 .follow-btn.btn-info:hover,
@@ -164,7 +162,8 @@ field-validation-error {
 }
 .label-warning {
   border-radius: 6px;
-  padding: 10px 8px;
-  margin-left: 16px;
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px 10px;
   width: 80px;
 }

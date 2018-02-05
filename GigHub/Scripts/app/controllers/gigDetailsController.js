@@ -18,7 +18,7 @@
     };
 
     var toggleButton = function () {
-        var text = (button.text() === "Follow") ? "Following" : "Follow";
+        var text = (button.text().trim() == "Follow") ? "Following" : "Follow";
 
         button
             .toggleClass("btn-info")
