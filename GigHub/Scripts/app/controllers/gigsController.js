@@ -11,13 +11,14 @@
         var gigId = button.attr("data-gig-id");
         if (button.hasClass("btn-default"))
             attendanceService.createAttendance(
-                gigId, function () { toggleButton("Going"); }, fail);
+                gigId, toggleButton, fail);
         else
             attendanceService.deleteAttendance(
-                gigId, function () { toggleButton("Going ?"); }, fail);
+                gigId, toggleButton, fail);
     };
 
-    var toggleButton = function (text) {
+    var toggleButton = function () {
+        var text = (button.text() === "Going ?") ? "Going" : "Going ?";
         button
             .toggleClass("btn-info")
             .toggleClass("btn-default")

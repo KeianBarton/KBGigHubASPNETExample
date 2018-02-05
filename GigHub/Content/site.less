@@ -194,18 +194,17 @@ field-validation-error {
     }
 
     &.btn-info {
-        border: none;
+        border-color: @std-dark;
         background-color: @std-norm;
         color: @txt-lite;
         opacity: 1;
         margin-left: 16px;
         width: 80px;
+    }
 
-        :hover,
-        :focus {
-            background-color: @std-lite;
-            border-color: @std-lite;
-        }
+    &.btn-info:hover {
+        background-color: @std-lite;
+        border-color: @std-norm;
     }
 }
 

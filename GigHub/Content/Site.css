@@ -150,19 +150,17 @@ field-validation-error {
 }
 .follow-btn.btn-info,
 .going-btn.btn-info {
-  border: none;
+  border-color: #341d6c;
   background-color: #512da8;
   color: #ffffff;
   opacity: 1;
   margin-left: 16px;
   width: 80px;
 }
-.follow-btn.btn-info :hover,
-.going-btn.btn-info :hover,
-.follow-btn.btn-info :focus,
-.going-btn.btn-info :focus {
+.follow-btn.btn-info:hover,
+.going-btn.btn-info:hover {
   background-color: #7651d0;
-  border-color: #7651d0;
+  border-color: #512da8;
 }
 .label-warning {
   border-radius: 6px;

@@ -11,13 +11,15 @@
         var userId = button.attr("data-user-id");
         if (button.hasClass("btn-default"))
             followingService.createFollowing(
-                userId, function () { toggleButton("Following"); }, fail);
+                userId, toggleButton, fail);
         else
             followingService.deleteFollowing(
-                userId, function () { toggleButton("Follow"); }, fail);
+                userId, toggleButton, fail);
     };
 
-    var toggleButton = function (text) {
+    var toggleButton = function () {
+        var text = (button.text() === "Follow") ? "Following" : "Follow";
+
         button
             .toggleClass("btn-info")
             .toggleClass("btn-default")

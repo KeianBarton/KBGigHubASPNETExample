@@ -9,6 +9,9 @@ a:focus {
   background: #512da8;
   border: none;
 }
+.btn:focus {
+  outline: none;
+}
 .label-info {
   background-color: #7651d0;
 }
