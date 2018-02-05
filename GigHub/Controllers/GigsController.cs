@@ -24,7 +24,8 @@ namespace GigHub.Controllers
             var gigs = _context.Attendances
                 .Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
-                .Include(g => g.Artist) // Eager load artist and genre
+                .Include(g => g.Artist)
+                .Include(g => g.Artist.Followers)
                 .Include(g => g.Genre)
                 .ToList();
 

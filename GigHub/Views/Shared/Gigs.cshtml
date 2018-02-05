@@ -49,9 +49,11 @@
                             {
                                 <button data-user-id="@gig.ArtistId"
                                     class="btn btn-sm follow-btn
-                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ? "btn-info" : "btn-default")
+                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
+                                        "btn-info" : "btn-default")
                                         pull-right js-toggle-follow">
-                                    Following
+                                    @(gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
+                                        "Following" : "Follow")
                                 </button>
                             }
                             else
@@ -74,7 +76,7 @@
                             else if (gig.ArtistId != userId)
                             {
                                 <button data-gig-id="@gig.Id"
-                                        class="btn btn
+                                        class="btn going-btn
                                         @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
                                         btn-sm pull-right js-toggle-attendance">
                                     @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going ?")

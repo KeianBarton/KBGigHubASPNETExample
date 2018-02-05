@@ -2,13 +2,17 @@
 @model GigHub.ViewModels.GigDetailsViewModel
 @{
     ViewBag.Title = "Gig Details - " + Model.Gig.Artist.Name;
+    var userId = User.Identity.GetUserId();
 }
 <h2>@Model.Gig.Artist.Name
-    @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != User.Identity.GetUserId())
+    @if (User.Identity.IsAuthenticated && Model.Gig.ArtistId != userId)
     {
         <button data-user-id="@Model.Gig.ArtistId"
-                class="btn btn-sm btn-default js-toggle-follow follow-btn">
-            Follow
+            class="btn btn-sm follow-btn
+            @(Model.Gig.Artist.Followers.Any(f => f.FollowerId == userId) ?
+                "btn-info" : "btn-default")
+                js-toggle-follow">
+            Following
         </button>
     }
     </h2>
@@ -22,29 +26,50 @@
 {
     <script>
         $(document).ready(function () {
-            var True = true;
-            var False = false;
-            if (@Model.IsFollowing)
-            {
-                $(".js-toggle-follow")
-                    .text("Following")
+            if (@Model.IsFollowing.ToString().ToLower()) {
+                $(".follow-btn")
                     .removeClass("btn-default")
-                    .addClass("btn-info");
-                return;
+                    .addClass("btn-info")
+                    .text("Following")
+            } else {
+                $(".follow-btn")
+                    .removeClass("btn-info")
+                    .addClass("btn-default")
+                    .text("Follow")
             }
 
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/followings",
-                    // has to be in object body as expected in controller
-                    { followeeId: button.attr("data-user-id") })
-                    .done(function () { // success callback
-                        button.text("Following");
-                        button.prop("disabled", true);
+                if (button.hasClass("btn-default")) {
+                    $.post("/api/followings",
+                        // has to be in object body as expected in controller
+                        { followeeId: button.attr("data-user-id") })
+                        .done(function () { // success callback
+                            _.each($(".follow-btn"), function (btn) {
+                                $(btn).removeClass("btn-default")
+                                 .addClass("btn-info")
+                                 .text("Following")
+                            });
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("data-user-id"),
+                        method: "DELETE"
                     })
-                    .fail(function () {
-                        alert("Something failed!");
-                    });
+                        .done(function () {
+                            _.each($(".follow-btn"), function (btn) {
+                                $(btn).removeClass("btn-info")
+                                 .addClass("btn-default")
+                                 .text("Follow")
+                            });
+                        })
+                        .fail(function () {
+                            alert("Something failed!");
+                        });
+                }
             });
         });
     </script>

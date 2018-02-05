@@ -109,31 +109,6 @@ field-validation-error {
   flex: 1;
   margin-left: 16px;
 }
-.gigs > li .details .btn-default {
-  color: #341d6c;
-  margin-left: 16px;
-  width: 80px;
-}
-.gigs > li .details .btn-info {
-  border: none;
-  background-color: #512da8;
-  color: #ffffff;
-  opacity: 1;
-  margin-left: 16px;
-  width: 80px;
-}
-.gigs > li .details .btn-info:hover,
-.gigs > li .details .btn-info:focus {
-  background-color: #7651d0;
-  border-color: #7651d0;
-}
-.gigs > li .details .label-info {
-  border-radius: 6px;
-  background-color: #341d6c;
-  padding: 10px 8px;
-  margin-left: 16px;
-  width: 80px;
-}
 .gigs > li .details .artist {
   font-weight: bold;
 }
@@ -166,4 +141,33 @@ field-validation-error {
 }
 .popover-notifications .popover-content {
   padding: 0;
+}
+.follow-btn.btn-default,
+.going-btn.btn-default {
+  color: #341d6c;
+  margin-left: 16px;
+  width: 80px;
+}
+.follow-btn.btn-info,
+.going-btn.btn-info {
+  border: none;
+  background-color: #512da8;
+  color: #ffffff;
+  opacity: 1;
+  margin-left: 16px;
+  width: 80px;
+}
+.follow-btn.btn-info :hover,
+.going-btn.btn-info :hover,
+.follow-btn.btn-info :focus,
+.going-btn.btn-info :focus {
+  background-color: #7651d0;
+  border-color: #7651d0;
+}
+.label-info {
+  border-radius: 6px;
+  background-color: #341d6c;
+  padding: 10px 8px;
+  margin-left: 16px;
+  width: 80px;
 }
