@@ -164,9 +164,8 @@ field-validation-error {
   background-color: #7651d0;
   border-color: #7651d0;
 }
-.label-info {
+.label-warning {
   border-radius: 6px;
-  background-color: #341d6c;
   padding: 10px 8px;
   margin-left: 16px;
   width: 80px;
