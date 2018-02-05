@@ -44,7 +44,7 @@ namespace GigHub.Controllers.Api
         }
 
         [HttpDelete]
-        public async Task<IHttpActionResult> DeleteFollowing(string id)
+        public async Task<IHttpActionResult> UnFollow(string id)
         {
             var userId = User.Identity.GetUserId();
             var following = _context.Followings
