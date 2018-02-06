@@ -1,16 +1,19 @@
 ﻿using GigHub.Models;
 using GigHub.Repositories;
+using System.Threading.Tasks;
 
 namespace GigHub.Persistence
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
 
-        public GigRepository Gigs { get; private set; }
-        public GenreRepository Genres { get; private set; }
-        public FollowingRepository Followings { get; private set; }
-        public AttendanceRepository Attendances { get; private set; }
+        public IGigRepository Gigs { get; private set; }
+        public IGenreRepository Genres { get; private set; }
+        public IFollowingRepository Followings { get; private set; }
+        public IAttendanceRepository Attendances { get; private set; }
+        public INotificationRepository Notifications { get; private set; }
+        public IUserRepository Users { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -19,11 +22,17 @@ namespace GigHub.Persistence
             Genres = new GenreRepository(context);
             Followings = new FollowingRepository(context);
             Attendances = new AttendanceRepository(context);
+            Users = new UserRepository(context);
         }
 
         public void Complete()
         {
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+        public async Task<int> CompleteAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

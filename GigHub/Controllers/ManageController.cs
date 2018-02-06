@@ -1,4 +1,4 @@
-﻿using GigHub.Models;
+﻿using GigHub.Persistence;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,13 +13,13 @@ namespace GigHub.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -66,7 +66,7 @@ namespace GigHub.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var name = _context.Users.SingleOrDefault(u => u.Id == userId).Name;
+            var name = _unitOfWork.Users.GetUser(userId).Name;
 
             var model = new IndexViewModel
             {

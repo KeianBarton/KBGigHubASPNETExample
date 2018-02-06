@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace GigHub.Repositories
 {
-    public class FollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -21,10 +21,10 @@ namespace GigHub.Repositories
                 .Select(f => f.Follower);
         }
 
-        public Following GetFollowing(string userId, string artistId)
+        public Following GetFollowing(string followerId, string followeeId)
         {
             return _context.Followings
-                    .SingleOrDefault(f => f.FolloweeId == artistId && f.FollowerId == userId);
+                    .SingleOrDefault(f => f.FolloweeId == followeeId && f.FollowerId == followerId);
         }
 
         public IEnumerable<Following> GetFollowingForUser(string userId)
@@ -34,6 +34,16 @@ namespace GigHub.Repositories
                 .Include(f => f.Follower)
                 .Include(f => f.Followee)
                 .ToList();
+        }
+
+        public void Add(Following following)
+        {
+            _context.Followings.Add(following);
+        }
+
+        public void Remove(Following following)
+        {
+            _context.Followings.Remove(following);
         }
     }
 }

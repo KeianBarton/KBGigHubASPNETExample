@@ -1,5 +1,4 @@
-﻿using GigHub.Models;
-using GigHub.Persistence;
+﻿using GigHub.Persistence;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
@@ -8,13 +7,11 @@ namespace GigHub.Controllers
 {
     public class FollowingsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FollowingsController()
+        public FollowingsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult Following()
