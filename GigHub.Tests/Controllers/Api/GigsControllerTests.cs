@@ -1,10 +1,14 @@
 ﻿using NUnit.Framework;
 
-namespace GigHub.Tests
+namespace GigHub.Controllers.Api
 {
     [TestFixture]
-    public class UnitTest1
+    public class GigsControllerTests
     {
+        public GigsControllerTests()
+        {
+        }
+
         [Test]
         public void TestMethod1()
         {
