@@ -1,0 +1,28 @@
+﻿using GigHub.Core.Models.Notifications;
+using System.Data.Entity.ModelConfiguration;
+
+namespace GigHub.Persistence.EntityConfigurations
+{
+    public class UserNotificationConfiguration : EntityTypeConfiguration<UserNotification>
+    {
+        public UserNotificationConfiguration()
+        {
+            // Property configurations
+            HasKey(u => u.UserId);
+            Property(u => u.UserId)
+                .HasColumnOrder(1);
+
+            HasKey(u => u.NotificationId);
+            Property(u => u.NotificationId)
+                .HasColumnOrder(2);
+
+            // Relationship configurations
+            // Turn off cascade delete between user notifications and users
+            // We have one and only one user for each user notification
+            // Each user can have many user notifications
+            HasRequired(n => n.User)
+                .WithMany(u => u.UserNotifications)
+                .WillCascadeOnDelete(false);
+        }
+    }
+}

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using GigHub.Dtos;
-using GigHub.Models;
-using GigHub.Models.Notifications;
+using GigHub.Core.Dtos;
+using GigHub.Core.Models;
+using GigHub.Core.Models.Notifications;
 
 namespace GigHub.App_Start
 {
