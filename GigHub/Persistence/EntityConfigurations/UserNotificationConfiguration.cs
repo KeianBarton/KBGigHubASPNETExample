@@ -8,13 +8,7 @@ namespace GigHub.Persistence.EntityConfigurations
         public UserNotificationConfiguration()
         {
             // Property configurations
-            HasKey(u => u.UserId);
-            Property(u => u.UserId)
-                .HasColumnOrder(1);
-
-            HasKey(u => u.NotificationId);
-            Property(u => u.NotificationId)
-                .HasColumnOrder(2);
+            HasKey(un => new { un.UserId, un.NotificationId });
 
             // Relationship configurations
             // Turn off cascade delete between user notifications and users

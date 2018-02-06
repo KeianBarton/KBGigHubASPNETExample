@@ -8,13 +8,7 @@ namespace GigHub.Persistence.EntityConfigurations
         public AttendanceConfiguration()
         {
             // Property configurations
-            HasKey(a => a.GigId);
-            Property(a => a.GigId)
-                .HasColumnOrder(1);
-
-            HasKey(a => a.AttendeeId);
-            Property(a => a.AttendeeId)
-                .HasColumnOrder(2);
+            HasKey(a => new { a.GigId, a.AttendeeId });
 
             // Relationship configurations
         }

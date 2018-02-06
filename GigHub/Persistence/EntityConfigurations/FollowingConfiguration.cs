@@ -8,13 +8,7 @@ namespace GigHub.Persistence.EntityConfigurations
         public FollowingConfiguration()
         {
             // Property configurations
-            HasKey(f => f.FollowerId);
-            Property(f => f.FollowerId)
-                .HasColumnOrder(1);
-
-            HasKey(f => f.FolloweeId);
-            Property(f => f.FolloweeId)
-                .HasColumnOrder(2);
+            HasKey(f => new { f.FollowerId, f.FolloweeId });
 
             // Relationship configurations
         }
