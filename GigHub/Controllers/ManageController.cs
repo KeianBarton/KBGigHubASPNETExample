@@ -17,15 +17,11 @@ namespace GigHub.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUnitOfWork unitOfWork)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
         public ApplicationSignInManager SignInManager

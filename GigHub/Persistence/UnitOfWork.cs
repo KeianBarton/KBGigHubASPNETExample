@@ -22,6 +22,7 @@ namespace GigHub.Persistence
             Genres = new GenreRepository(context);
             Followings = new FollowingRepository(context);
             Attendances = new AttendanceRepository(context);
+            Notifications = new NotificationRepository(context);
             Users = new UserRepository(context);
         }
 
