@@ -30,7 +30,7 @@ namespace GigHub.Repositories
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public List<Gig> GetGigsUserAttending(string userId)
+        public IEnumerable<Gig> GetGigsUserAttending(string userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
@@ -41,7 +41,7 @@ namespace GigHub.Repositories
                 .ToList();
         }
 
-        public List<Gig> GetUpcomingGigsByArtist(string userId)
+        public IEnumerable<Gig> GetUpcomingGigsByArtist(string userId)
         {
             return _context.Gigs
                 .Where(g =>
@@ -50,6 +50,17 @@ namespace GigHub.Repositories
                     g.DateTime > DateTime.Now)
                 .Include(g => g.Genre)
                 .ToList();
+        }
+
+        public IEnumerable<Gig> GetAllUpcomingGigsWithFollowers()
+        {
+            return _context.Gigs
+                .Include(g => g.Artist)
+                .Include(g => g.Artist.Followers)
+                .Include(g => g.Genre)
+                .Where(g =>
+                    g.DateTime > DateTime.Now &&
+                    !g.IsCancelled);
         }
 
         public void Add(Gig gig)
