@@ -296,10 +296,6 @@
     <Compile Include="Persistence\Migrations\201801301346194_AddNotification.Designer.cs">
       <DependentUpon>201801301346194_AddNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201802061528168_RefactoredArchitectureAndDataAnnotations.cs" />
-    <Compile Include="Persistence\Migrations\201802061528168_RefactoredArchitectureAndDataAnnotations.Designer.cs">
-      <DependentUpon>201802061528168_RefactoredArchitectureAndDataAnnotations.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
@@ -476,9 +472,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801301346194_AddNotification.resx">
       <DependentUpon>201801301346194_AddNotification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201802061528168_RefactoredArchitectureAndDataAnnotations.resx">
-      <DependentUpon>201802061528168_RefactoredArchitectureAndDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
