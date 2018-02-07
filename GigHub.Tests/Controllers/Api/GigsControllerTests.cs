@@ -1,4 +1,5 @@
-﻿using GigHub.Core;
+﻿using GigHub.Controllers.Api;
+using GigHub.Core;
 using GigHub.Core.Models;
 using GigHub.Core.Repositories;
 using GigHub.Tests.Extensions;
@@ -6,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using System.Web.Http.Results;
 
-namespace GigHub.Controllers.Api
+namespace GigHub.Tests.Controllers.Api
 {
     [TestFixture]
     public class GigsControllerTests
