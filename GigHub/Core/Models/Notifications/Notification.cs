@@ -23,7 +23,7 @@ namespace GigHub.Core.Models.Notifications
             Type = notificationType;
         }
 
-        public static Notification Factory_Gig(
+        public static Notification FactoryGig(
             Gig gig,
             NotificationType notificationType,
             DateTime? dateTime = null,

@@ -28,13 +28,12 @@ namespace GigHub.Core.Models
 
         public Gig()
         {
+            Attendances = new Collection<Attendance>();
         }
 
-        public Gig(IEnumerable<ApplicationUser> followers)
+        public Gig(IEnumerable<ApplicationUser> followers) : this()
         {
-            Attendances = new Collection<Attendance>();
-
-            var notification = Notification.Factory_Gig(this, NotificationType.GigCreated);
+            var notification = Notification.FactoryGig(this, NotificationType.GigCreated);
 
             foreach (var follower in followers)
             {
@@ -46,7 +45,7 @@ namespace GigHub.Core.Models
         {
             IsCancelled = true;
 
-            var notification = Notification.Factory_Gig(this, NotificationType.GigCancelled);
+            var notification = Notification.FactoryGig(this, NotificationType.GigCancelled);
 
             foreach (var attendee in Attendances.Select(a => a.Attendee))
             {
@@ -56,7 +55,7 @@ namespace GigHub.Core.Models
 
         public void Modify(DateTime dateTime, string venue, byte genre)
         {
-            var notification = Notification.Factory_Gig(this, NotificationType.GigUpdated, DateTime, Venue);
+            var notification = Notification.FactoryGig(this, NotificationType.GigUpdated, DateTime, Venue);
             DateTime = dateTime;
             Venue = venue;
             GenreId = genre;
