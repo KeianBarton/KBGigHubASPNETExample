@@ -31,11 +31,12 @@ namespace GigHub.Persistence.Repositories
                 .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public IEnumerable<Gig> GetGigsUserAttending(string userId)
+        public IEnumerable<Gig> GetGigsUserAttendingIncludingCancelled(string userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
+                .Where(g => g.DateTime > DateTime.Now)
                 .Include(g => g.Artist)
                 .Include(g => g.Artist.Followers)
                 .Include(g => g.Genre)

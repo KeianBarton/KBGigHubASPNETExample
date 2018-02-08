@@ -23,7 +23,7 @@ namespace GigHub.Controllers
 
             var viewModel = new GigsViewModel
             {
-                UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
+                UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttendingIncludingCancelled(userId),
                 Attendances = _unitOfWork.Attendances.GetFutureAttendancesForUser(userId)
                     .ToLookup(a => a.GigId),
                 ShowActions = User.Identity.IsAuthenticated,
