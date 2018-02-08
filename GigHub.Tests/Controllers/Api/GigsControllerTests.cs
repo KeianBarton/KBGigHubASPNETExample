@@ -21,7 +21,7 @@ namespace GigHub.Tests.Controllers.Api
         private const string _UserName = "user1@domain.com";
 
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
             _mockGigRepository = new Mock<IGigRepository>();
 
@@ -33,7 +33,7 @@ namespace GigHub.Tests.Controllers.Api
         }
 
         [TearDown]
-        public void Dispose()
+        public void TearDown()
         {
             _controller = null;
             _mockGigRepository = null;

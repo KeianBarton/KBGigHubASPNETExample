@@ -21,7 +21,7 @@ namespace GigHub.Tests.Persistence.Repositories
         private IAttendanceRepository _attendanceRepository;
 
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
             _mockGigs = new Mock<DbSet<Gig>>();
             _mockAttendances = new Mock<DbSet<Attendance>>();
@@ -49,7 +49,7 @@ namespace GigHub.Tests.Persistence.Repositories
         }
 
         [TearDown]
-        public void Dispose()
+        public void TearDown()
         {
             _mockContext = null;
             _mockGigs = null;

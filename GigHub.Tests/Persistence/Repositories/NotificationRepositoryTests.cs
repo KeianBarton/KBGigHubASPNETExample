@@ -19,7 +19,7 @@ namespace GigHub.Tests.Persistence.Repositories
         private INotificationRepository _notificationsRepository;
 
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
             _mockUserNotifications = new Mock<DbSet<UserNotification>>();
             _mockContext = new Mock<IApplicationDbContext>();
@@ -36,7 +36,7 @@ namespace GigHub.Tests.Persistence.Repositories
         }
 
         [TearDown]
-        public void Dispose()
+        public void TearDown()
         {
             _mockContext = null;
             _mockUserNotifications = null;

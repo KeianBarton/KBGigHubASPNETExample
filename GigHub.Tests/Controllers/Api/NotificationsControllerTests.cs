@@ -24,7 +24,7 @@ namespace GigHub.Tests.Controllers.Api
         private const string _UserName = "user1@domain.com";
 
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
             _mockNotificationRepository = new Mock<INotificationRepository>();
 
@@ -36,7 +36,7 @@ namespace GigHub.Tests.Controllers.Api
         }
 
         [TearDown]
-        public void Dispose()
+        public void TearDown()
         {
             _controller = null;
             _mockNotificationRepository = null;
